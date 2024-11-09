@@ -51,15 +51,15 @@ function getEnglishResponse(input) {
   } else if (input.toLowerCase().includes('give me an icon')) {
     provideIcon();
     return 'I am generating an icon for you. Please wait!';
+  } else if (input.toLowerCase().includes('leaderstats')) {
+    return getLeaderstatsCode();
   } else if (input.toLowerCase().includes('how are you')) {
     return 'I\'m doing great, thank you for asking!';
   } else if (input.toLowerCase().includes('your name')) {
     return 'I\'m Talk Bot, your friendly AI assistant!';
-  }  else if (input.toLowerCase().includes('how is marionhake?')) {
+  } else if (input.toLowerCase().includes('how is marionhake?')) {
     return 'marionhake is my owner!';
-  }
-  
-  else if (input.toLowerCase().includes('bye')) {
+  } else if (input.toLowerCase().includes('bye')) {
     return 'Goodbye! Have a great day!';
   } else {
     return 'I\'m not sure how to respond to that. Can you ask something else?';
@@ -124,4 +124,48 @@ function provideIcon() {
   link.download = 'icon.ico';
   link.href = canvas.toDataURL('image/x-icon');
   link.click();
+}
+
+function getLeaderstatsCode() {
+  return `Here's a sample code for leaderstats with DataStore:
+  local DataStoreService = game:GetService("DataStoreService")
+  local playerStats = DataStoreService:GetDataStore("PlayerStats")
+
+  game.Players.PlayerAdded:Connect(function(player)
+      local leaderstats = Instance.new("Folder")
+      leaderstats.Name = "leaderstats"
+      leaderstats.Parent = player
+
+      local points = Instance.new("IntValue")
+      points.Name = "Points"
+      points.Value = 0
+      points.Parent = leaderstats
+
+      local success, savedPoints = pcall(function()
+          return playerStats:GetAsync(player.UserId)
+      end)
+
+      if success and savedPoints then
+          points.Value = savedPoints
+      end
+
+      points.Changed:Connect(function()
+          local success, err = pcall(function()
+              playerStats:SetAsync(player.UserId, points.Value)
+          end)
+          if not success then
+              warn("Failed to save points:", err)
+          end
+      end)
+  end)
+
+  game.Players.PlayerRemoving:Connect(function(player)
+      local success, err = pcall(function()
+          playerStats:SetAsync(player.UserId, player.leaderstats.Points.Value)
+      end)
+      if not success then
+          warn("Failed to save points on exit:", err)
+      end
+  end)
+  `;
 }
