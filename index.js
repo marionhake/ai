@@ -44,7 +44,7 @@ function isGreekText(text) {
 
 function getEnglishResponse(input) {
   if (input.toLowerCase().includes('hello') || input.toLowerCase().includes('hi')) {
-    return 'Hello! How can I assist you today?';
+    return 'Hello! How can I help you today?';
   } else if (input.toLowerCase().includes('make me 1 image')) {
     createImageFromMessage(input);
     return 'I am generating an image based on your request. Please wait!';
