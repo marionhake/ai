@@ -51,7 +51,7 @@ function getEnglishResponse(input) {
   } else if (input.toLowerCase().includes('give me an icon')) {
     provideIcon();
     return 'I am generating an icon for you. Please wait!';
-  } else if (input.toLowerCase().includes('leaderstats')) {
+  } else if (input.toLowerCase().includes('roblox leaderstats code') || input.toLowerCase().includes('give me an roblox leaderstats code') || input.toLowerCase().includes('help me add leaderstats in my roblox game')) {
     return getLeaderstatsCode();
   } else if (input.toLowerCase().includes('how are you')) {
     return 'I\'m doing great, thank you for asking!';
