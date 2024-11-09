@@ -25,6 +25,9 @@ function getAIResponse(input) {
 
   if (userMessage.includes('hello')) {
     return 'Hi there! How can I help you today?';
+  }
+  else if (userMessage.includes('hi')) {
+    return 'Hi there! How can I help you todat?';
   } else if (userMessage.includes('how are you')) {
     return 'I\'m doing great, thank you for asking!';
   } else if (userMessage.includes('your name')) {
@@ -33,5 +36,6 @@ function getAIResponse(input) {
     return 'Goodbye! Have a great day!';
   } else {
     return 'I\'m not sure how to respond to that. Can you ask something else?';
+   
   }
 }
