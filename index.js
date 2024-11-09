@@ -55,7 +55,11 @@ function getEnglishResponse(input) {
     return 'I\'m doing great, thank you for asking!';
   } else if (input.toLowerCase().includes('your name')) {
     return 'I\'m Talk Bot, your friendly AI assistant!';
-  } else if (input.toLowerCase().includes('bye')) {
+  }  else if (input.toLowerCase().includes('how is marionhake?')) {
+    return 'marionhake is my owner!';
+  }
+  
+  else if (input.toLowerCase().includes('bye')) {
     return 'Goodbye! Have a great day!';
   } else {
     return 'I\'m not sure how to respond to that. Can you ask something else?';
