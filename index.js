@@ -28,11 +28,8 @@ function checkEnter(event) {
 
 function getAIResponse(input) {
   const userMessage = input.trim();
-  
-  // Check if the input is in Greek
   const isGreek = isGreekText(userMessage);
 
-  // If it's Greek, respond in Greek; otherwise, respond in English
   if (isGreek) {
     return getGreekResponse(userMessage);
   } else {
@@ -41,7 +38,6 @@ function getAIResponse(input) {
 }
 
 function isGreekText(text) {
-  // Simple check for Greek characters in the string
   const greekRegex = /[\u0370-\u03FF\u1F00-\u1FFF]/;
   return greekRegex.test(text);
 }
@@ -52,7 +48,7 @@ function getEnglishResponse(input) {
   } else if (input.toLowerCase().includes('make me 1 image')) {
     createImageFromMessage(input);
     return 'I am generating an image based on your request. Please wait!';
-  } else if (input.toLowerCase().includes('give ma an icon')) {
+  } else if (input.toLowerCase().includes('give me an icon')) {
     provideIcon();
     return 'I am generating an icon for you. Please wait!';
   } else if (input.toLowerCase().includes('how are you')) {
@@ -125,4 +121,3 @@ function provideIcon() {
   link.href = canvas.toDataURL('image/x-icon');
   link.click();
 }
-
