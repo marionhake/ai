@@ -6,7 +6,7 @@ function sendMessage() {
   
   const aiResponse = getAIResponse(userInput);
 
-  setTimeout(() => appendMessage('AI: ' + aiResponse, 'ai'), 1000);
+  setTimeout(() => appendMessage('Talk Bot: ' + aiResponse, 'ai'), 1000);
 
   document.getElementById('user-input').value = '';
 }
@@ -27,24 +27,62 @@ function checkEnter(event) {
 }
 
 function getAIResponse(input) {
-  const userMessage = input.toLowerCase();
+  const userMessage = input.trim();
+  
+  // Check if the input is in Greek
+  const isGreek = isGreekText(userMessage);
 
-  if (userMessage.includes('hello') || userMessage.includes('hi')) {
+  // If it's Greek, respond in Greek; otherwise, respond in English
+  if (isGreek) {
+    return getGreekResponse(userMessage);
+  } else {
+    return getEnglishResponse(userMessage);
+  }
+}
+
+function isGreekText(text) {
+  // Simple check for Greek characters in the string
+  const greekRegex = /[\u0370-\u03FF\u1F00-\u1FFF]/;
+  return greekRegex.test(text);
+}
+
+function getEnglishResponse(input) {
+  if (input.toLowerCase().includes('hello') || input.toLowerCase().includes('hi')) {
     return 'Hello! How can I assist you today?';
-  } else if (userMessage.includes('make me 1 image')) {
+  } else if (input.toLowerCase().includes('make me 1 image')) {
     createImageFromMessage(input);
     return 'I am generating an image based on your request. Please wait!';
-  } else if (userMessage.includes('give me an icon')) {
+  } else if (input.toLowerCase().includes('give me an icon')) {
     provideIcon();
     return 'I am generating an icon for you. Please wait!';
-  } else if (userMessage.includes('how are you')) {
+  } else if (input.toLowerCase().includes('how are you')) {
     return 'I\'m doing great, thank you for asking!';
-  } else if (userMessage.includes('your name')) {
-    return 'I\'m your friendly AI assistant!';
-  } else if (userMessage.includes('bye')) {
+  } else if (input.toLowerCase().includes('your name')) {
+    return 'I\'m Talk Bot, your friendly AI assistant!';
+  } else if (input.toLowerCase().includes('bye')) {
     return 'Goodbye! Have a great day!';
   } else {
     return 'I\'m not sure how to respond to that. Can you ask something else?';
+  }
+}
+
+function getGreekResponse(input) {
+  if (input.toLowerCase().includes('γειά') || input.toLowerCase().includes('χαίρετε')) {
+    return 'Γειά σας! Πώς μπορώ να σας βοηθήσω σήμερα;';
+  } else if (input.toLowerCase().includes('κάνε μου 1 εικόνα')) {
+    createImageFromMessage(input);
+    return 'Δημιουργώ μια εικόνα με βάση το αίτημά σας. Παρακαλώ περιμένετε!';
+  } else if (input.toLowerCase().includes('δώσε μου ένα εικονίδιο')) {
+    provideIcon();
+    return 'Δημιουργώ ένα εικονίδιο για εσάς. Παρακαλώ περιμένετε!';
+  } else if (input.toLowerCase().includes('πώς είσαι')) {
+    return 'Είμαι πολύ καλά, ευχαριστώ που ρωτήσατε!';
+  } else if (input.toLowerCase().includes('το όνομά σου')) {
+    return 'Είμαι ο Talk Bot, ο φιλικός σας βοηθός AI!';
+  } else if (input.toLowerCase().includes('αντίο')) {
+    return 'Αντίο! Να έχετε μια υπέροχη μέρα!';
+  } else {
+    return 'Δεν ξέρω πώς να απαντήσω σε αυτό. Μπορείτε να ρωτήσετε κάτι άλλο;';
   }
 }
 
