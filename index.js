@@ -52,7 +52,7 @@ function getEnglishResponse(input) {
   } else if (input.toLowerCase().includes('make me 1 image')) {
     createImageFromMessage(input);
     return 'I am generating an image based on your request. Please wait!';
-  } else if (input.toLowerCase().includes('give me an icon')) {
+  } else if (input.toLowerCase().includes('give ma an icon')) {
     provideIcon();
     return 'I am generating an icon for you. Please wait!';
   } else if (input.toLowerCase().includes('how are you')) {
